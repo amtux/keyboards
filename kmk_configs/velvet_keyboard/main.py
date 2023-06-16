@@ -10,7 +10,8 @@ from kmk.modules.capsword import CapsWord
 from storage import getmount
 
 keyboard = KMKKeyboard()
-keyboard.debug_enabled = True
+# keyboard.debug_enabled = True
+
 # keyboard.tap_time which defines how long KC.TT and KC.LT will wait 
 # before considering a key "held" (see layers.md).
 keyboard.tap_time = 150 # ms
@@ -42,28 +43,22 @@ keyboard.modules.append(MouseKeys())
 
 # CAPS WORD: http://kmkfw.io/docs/capsword
 caps_word=CapsWord()
-caps_word.keys_ignored.append(KC.SPACE)
+# caps_word.keys_ignored.append(KC.SPC)  # to ignore space
 keyboard.modules.append(caps_word)
 # -----------------------------------------------------------------
 
 # [[ LAYERS ]] ----------------------------------------------------
-# KEYCODES: http://kmkfw.io/docs/keycodes/
-____ = KC.TRNS
-XXXX = KC.NO
-
-
 # HOLDTAP MODS: http://kmkfw.io/docs/holdtap#custom-holdtap-behavior
 # KC.HT(KC.TAP, KC.HOLD, prefer_hold=True, tap_interrupted=False, tap_time=None, repeat=HoldTapRepeat.NONE)
-H_A_GUI = KC.HT(KC.A, KC.LGUI)
+H_A_GUI = KC.HT(KC.A, KC.LGUI, tap_interrupted=True, tap_time=220)
 H_S_ALT = KC.HT(KC.S, KC.LALT, tap_interrupted=True)
 H_D_CTL = KC.HT(KC.D, KC.LCTRL, tap_interrupted=True)
-H_F_SFT = KC.HT(KC.F, KC.LSHIFT)
+H_F_SFT = KC.HT(KC.F, KC.LSHIFT, tap_interrupted=True)
 
-H_SC_GUI = KC.HT(KC.SCOLON, KC.RGUI)
+H_SC_GUI = KC.HT(KC.SCOLON, KC.RGUI, tap_interrupted=True)
 H_L_ALT  = KC.HT(KC.L, KC.RALT, tap_interrupted=True)
 H_K_CTL  = KC.HT(KC.K, KC.RCTRL, tap_interrupted=True)
-H_J_SFT  = KC.HT(KC.J, KC.RSHIFT)
-
+H_J_SFT  = KC.HT(KC.J, KC.RSHIFT, tap_interrupted=True)
 
 # HOLDTAP LAYERS: http://kmkfw.io/docs/layers#keycodes
 L_TAB_NAV = KC.LT(1, KC.TAB)
@@ -72,6 +67,10 @@ L_ENT_SYM = KC.LT(3, KC.ENT)
 # -----------------------------------------------------------------
 
 # [[ KEYMAP ]] ----------------------------------------------------
+# KEYCODES: http://kmkfw.io/docs/keycodes/
+____ = KC.TRNS
+XXXX = KC.NO
+
 miryoku = [
     # 0: BASE
     [
@@ -85,21 +84,21 @@ miryoku = [
         XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.MS_LEFT, KC.MS_DOWN, KC.MS_UP,   KC.MS_RIGHT,XXXX,
         KC.LGUI,    KC.LALT,    KC.LCTRL,   KC.LSHIFT,  XXXX,       KC.LEFT,    KC.DOWN,    KC.UP,      KC.RIGHT,   KC.CAPSLOCK,
         XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.HOME,    KC.PGDN,    KC.PGUP,    KC.END,     XXXX,
-                    XXXX,       XXXX,       XXXX,       XXXX,       KC.MB_RMB,  KC.MB_LMB,  KC.MB_MMB,  XXXX,
+        XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.MB_RMB,  KC.MB_LMB,  KC.MB_MMB,  XXXX,
     ],
     # 2: NUM LAYER
     [
         XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.LBRC,    KC.N7,      KC.N8,      KC.N9,      KC.RBRC,
         KC.LGUI,    KC.LALT,    KC.LCTRL,   KC.LSHIFT,  XXXX,       KC.EQUAL,   KC.N4,      KC.N5,      KC.N6,      KC.SCOLON,
         XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.BSLASH,  KC.N1,      KC.N2,      KC.N3,      KC.GRAVE,
-                    XXXX,       XXXX,       XXXX,       XXXX,       KC.MINUS,   KC.N0,      KC.DOT,     XXXX,
+        XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.MINUS,   KC.N0,      KC.DOT,     XXXX,
     ],
     # 3: SYM NUM LAYER
     [
         XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.LBRC,    KC.N7,      KC.N8,      KC.N9,      KC.RBRC,
         KC.LGUI,    KC.LALT,    KC.LCTRL,   KC.LSHIFT,  XXXX,       KC.EQUAL,   KC.N4,      KC.N5,      KC.N6,      KC.SCOLON,
         XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.BSLASH,  KC.N1,      KC.N2,      KC.N3,      KC.GRAVE,
-                    XXXX,       XXXX,       XXXX,       XXXX,       KC.MINUS,   KC.N0,      KC.DOT,     XXXX,
+        XXXX,       XXXX,       XXXX,       XXXX,       XXXX,       KC.UNDS,   KC.N0,      KC.DOT,     XXXX,
     ],
 ]
 

@@ -2,6 +2,7 @@ import digitalio
 import storage
 import usb_cdc
 import usb_hid
+import usb_midi
 
 from kb import KMKKeyboard
 from kmk.scanners import DiodeOrientation
@@ -19,11 +20,10 @@ else:
     row.switch_to_output(value=True)
 
 if not row.value:
-    print("Safe mode: not hiding storage and disabling serial")
-    print("will disable storage and serial console in the future")
-    # storage.disable_usb_drive()
-    # usb_cdc.disable() # Equivalent to usb_cdc.enable(console=False, data=False)
-    # usb_hid.enable((usb_hid.Device.KEYBOARD), boot_device=1)
+    usb_cdc.disable()
+    usb_midi.disable()
+    storage.disable_usb_drive()
+    usb_hid.enable((usb_hid.Device.KEYBOARD), boot_device=1)
 
 row.deinit()
 col.deinit()
